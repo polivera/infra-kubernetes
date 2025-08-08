@@ -123,12 +123,3 @@ resource "kubernetes_stateful_set" "postgres" {
     kubernetes_secret.postgres
   ]
 }
-
-module "postgres_service" {
-  source = "../../../modules/services"
-  name   = var.namespace
-  namespace = var.namespace
-  headless = true
-  port = var.port
-  target_port = var.port
-}
