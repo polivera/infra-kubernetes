@@ -1,0 +1,6 @@
+.idea
+.env
+secrets.yaml
+secrets.yml
+.terraform/
+terraform.tfstate*
