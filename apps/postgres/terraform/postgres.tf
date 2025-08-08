@@ -41,7 +41,7 @@ resource "kubernetes_stateful_set" "postgres" {
             name = "POSTGRES_USER"
             value_from {
               secret_key_ref {
-                name = kubernetes_config_map.postgres.metadata[0].name
+                name = kubernetes_secret.postgres.metadata[0].name
                 key  = "postgres-user"
               }
             }
@@ -82,26 +82,6 @@ resource "kubernetes_stateful_set" "postgres" {
             }
           }
 
-          env {
-            name = "POSTGRES_USER"
-            value_from {
-              config_map_key_ref {
-                name = kubernetes_config_map.postgres.metadata[0].name
-                key  = "POSTGRES_USER"
-              }
-            }
-          }
-
-          env {
-            name = "POSTGRES_DB"
-            value_from {
-              config_map_key_ref {
-                name = kubernetes_config_map.postgres.metadata[0].name
-                key  = "POSTGRES_DB"
-              }
-            }
-          }
-
           liveness_probe {
             exec {
               command = [
@@ -138,7 +118,9 @@ resource "kubernetes_stateful_set" "postgres" {
   }
 
   depends_on = [
-    module.postgres_storage
+    module.postgres_storage,
+    kubernetes_config_map.postgres,
+    kubernetes_secret.postgres
   ]
 }
 

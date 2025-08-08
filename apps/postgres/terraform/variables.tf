@@ -31,13 +31,13 @@ variable "request_memory" {
 variable "limit_cpu" {
   description = "Limit CPU for container"
   type = string
-  default = "2Gi"
+  default = "1000m"
 }
 
 variable "limit_memory" {
   description = "Limit Memory for container"
   type = string
-  default = "1000m"
+  default = "2Gi"
 }
 
 variable "port" {

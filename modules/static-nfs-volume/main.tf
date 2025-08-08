@@ -37,7 +37,7 @@ resource "kubernetes_persistent_volume" "this" {
     }
 
     access_modes       = var.access_modes
-    storage_class_name = "" # Empty for static provisioning
+    storage_class_name = var.pool
 
     persistent_volume_source {
       csi {
@@ -69,7 +69,7 @@ resource "kubernetes_persistent_volume_claim" "this" {
 
   spec {
     access_modes       = var.access_modes
-    storage_class_name = "" # Must match PV
+    storage_class_name = var.pool # Must match PV
     volume_name        = kubernetes_persistent_volume.this.metadata[0].name
 
     resources {
