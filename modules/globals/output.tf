@@ -20,3 +20,11 @@ output "config_path" {
 output "sops_file_path" {
   value = local.sops_file
 }
+
+output "ingress_namespace" {
+  value = local.ingress_namespace
+}
+
+output "cert_secret_name" {
+  value = local.cert_secret_name
+}
