@@ -4,6 +4,24 @@ variable "headless" {
   default = false
 }
 
+variable "external" {
+  description = "Need metallb external service"
+  type = bool
+  default = false
+}
+
+variable "external_ip" {
+  description = "If declared external, give the metallb ip to assign"
+  type = string
+  default = ""
+}
+
+variable "external_allowed_cdir" {
+  description = "Allowed IPs for external access"
+  type = list(string)
+  default = ["192.168.0.0/24", "10.0.0.0/8"]
+}
+
 variable "service_type" {
   description = "Service Type"
   type = string
