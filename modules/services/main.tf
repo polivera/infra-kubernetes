@@ -42,11 +42,11 @@ resource "kubernetes_service" "this" {
 }
 
 # Make it conditional in external-service.tf
-resource "kubernetes_service" "mysql_external" {
+resource "kubernetes_service" "this-external" {
   count = var.external ? 1 : 0
 
   metadata {
-    name      = "mysql-external"
+    name      = "${var.name}-external"
     namespace = var.namespace
     annotations = {
       "metallb.universe.tf/loadBalancerIPs" = var.external_ip

@@ -45,3 +45,47 @@ variable "port" {
   type = string
   default = 5432
 }
+
+
+# Backup Configuration Variables
+variable "backup_schedule" {
+  description = "Cron schedule for PostgreSQL backups (default: daily at 2:00 AM)"
+  type        = string
+  default     = "0 2 * * *"
+}
+
+variable "backup_storage_size" {
+  description = "Storage size for PostgreSQL backups"
+  type        = string
+  default     = "50Gi"
+}
+
+variable "backup_retention_days" {
+  description = "Number of days to retain backups"
+  type        = number
+  default     = 7
+}
+
+variable "backup_request_cpu" {
+  description = "CPU request for backup job"
+  type        = string
+  default     = "100m"
+}
+
+variable "backup_request_memory" {
+  description = "Memory request for backup job"
+  type        = string
+  default     = "256Mi"
+}
+
+variable "backup_limit_cpu" {
+  description = "CPU limit for backup job"
+  type        = string
+  default     = "500m"
+}
+
+variable "backup_limit_memory" {
+  description = "Memory limit for backup job"
+  type        = string
+  default     = "512Mi"
+}
