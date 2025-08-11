@@ -41,3 +41,8 @@ resource "kubernetes_namespace" "monitoring" {
   }
 }
 
+locals {
+  enable_prometheus = 1
+  enable_grafana    = 1
+  enable_loki       = 0
+}
