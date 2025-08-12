@@ -15,7 +15,7 @@ variable "postgres_backup_enabled" {
 variable "postgres_backup_schedule" {
   description = "Cron schedule for Postgres backup"
   type        = string
-  default     = "56 0 * * *" # Daily at 2 AM
+  default     = "0 2 * * *" # Daily at 2 AM
 }
 
 variable "postgres_backup_retention_days" {
