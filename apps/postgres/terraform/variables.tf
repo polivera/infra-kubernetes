@@ -51,7 +51,7 @@ variable "port" {
 variable "backup_schedule" {
   description = "Cron schedule for PostgreSQL backups (default: daily at 2:00 AM)"
   type        = string
-  default     = "0 2 * * *"
+  default     = "23 9 * * *"
 }
 
 variable "backup_storage_size" {

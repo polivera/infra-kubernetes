@@ -25,18 +25,12 @@ resource "kubernetes_cron_job_v1" "postgres_backup" {
           spec {
             restart_policy = "OnFailure"
 
-            security_context {
-              run_as_user  = 999  # postgres user
-              run_as_group = 999  # postgres group
-              fs_group     = 999
-            }
-
             container {
               name  = "postgres-backup"
-              image = var.image  # Use same postgres image
+              image = var.image # Use same postgres image
 
               env {
-                name = "PGPASSWORD"
+                name = "POSTGRES_PASSWORD"
                 value_from {
                   secret_key_ref {
                     name = kubernetes_secret.postgres.metadata[0].name
@@ -70,13 +64,17 @@ resource "kubernetes_cron_job_v1" "postgres_backup" {
                 value = module.globals.timezone
               }
 
+              env {
+                name  = "POSTGRES_HOST"
+                value = "postgres-headless.${var.namespace}.svc.cluster.local"
+              }
+
               command = ["/bin/bash", "-c"]
               args = [
                 <<-EOF
                 set -e
 
                 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-                POSTGRES_HOST="postgres-headless.${var.namespace}.svc.cluster.local"
                 BACKUP_DIR="/backup/$TIMESTAMP"
 
                 echo "Starting PostgreSQL backup at $(date)"
@@ -90,7 +88,7 @@ resource "kubernetes_cron_job_v1" "postgres_backup" {
 
                   echo "Backing up database: $db_name"
 
-                  if pg_dump -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$db_name" | gzip > "$backup_file"; then
+                  if PGPASSWORD="$POSTGRES_PASSWORD" pg_dump -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$db_name" | gzip > "$backup_file"; then
                     if [ -s "$backup_file" ]; then
                       echo "✓ Database $db_name backed up successfully: $(ls -lh $backup_file | awk '{print $5}')"
                     else
@@ -105,7 +103,8 @@ resource "kubernetes_cron_job_v1" "postgres_backup" {
 
                 # Get list of all databases
                 echo "Fetching database list from $POSTGRES_HOST..."
-                DATABASES=$(psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -t -c "SELECT datname FROM pg_database WHERE datistemplate = false;" | sed 's/^[ \t]*//;s/[ \t]*$//' | grep -v '^$')
+                echo 'PGPASSWORD="$POSTGRES_PASSWORD" psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -t -c "SELECT datname FROM pg_database WHERE datistemplate = false;"'
+                DATABASES=$(PGPASSWORD="$POSTGRES_PASSWORD" psql -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -t -c "SELECT datname FROM pg_database WHERE datistemplate = false;" | sed 's/^[ \t]*//;s/[ \t]*$//' | grep -v '^$')
 
                 if [ -z "$DATABASES" ]; then
                   echo "ERROR: No databases found"
@@ -202,8 +201,8 @@ INFO
     # Keep last 3 successful jobs, 1 failed job
     successful_jobs_history_limit = 3
     failed_jobs_history_limit     = 1
-    concurrency_policy           = "Forbid"
-    starting_deadline_seconds    = 300
+    concurrency_policy            = "Forbid"
+    starting_deadline_seconds     = 300
   }
 
   depends_on = [
