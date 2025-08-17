@@ -28,3 +28,11 @@ output "ingress_namespace" {
 output "cert_secret_name" {
   value = local.cert_secret_name
 }
+
+output "dns_nameservers" {
+  value = local.dns_nameservers
+}
+
+output "dns_searches" {
+  value = local.dns_searches
+}
