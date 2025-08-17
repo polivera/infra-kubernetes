@@ -57,11 +57,11 @@ resource "kubernetes_service" "this-external" {
     type = "LoadBalancer"
 
     selector = {
-      app = "mysql"
+      app = var.name
     }
 
     port {
-      name        = "mysql"
+      name        = var.name
       port        = var.port
       target_port = var.port
       protocol    = "TCP"
