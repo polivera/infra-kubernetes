@@ -5,6 +5,12 @@ variable "namespace" {
   default     = "flipflow"
 }
 
+variable "mysql_replicas" {
+  description = "MySQL Replicas"
+  type = number
+  default = 0
+}
+
 variable "mysql_image" {
   description = "MySQL Image"
   type        = string

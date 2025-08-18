@@ -11,7 +11,7 @@ resource "kubernetes_stateful_set" "mysql" {
 
   spec {
     service_name = "mysql-headless"
-    replicas     = 1
+    replicas     = var.mysql_replicas
 
     selector {
       match_labels = {
