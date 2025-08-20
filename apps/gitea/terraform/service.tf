@@ -25,7 +25,7 @@ resource "kubernetes_service" "gitea_ssh" {
     }
     port {
       name        = "ssh"
-      port        = 22
+      port        = var.ssh_port
       target_port = var.ssh_port
       protocol    = "TCP"
     }

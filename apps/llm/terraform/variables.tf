@@ -90,3 +90,9 @@ variable "webui_data_storage" {
   type        = string
   default     = "5Gi"
 }
+
+variable "namespace_enabled" {
+  description = "Enable namespace"
+  type        = bool
+  default     = true
+}

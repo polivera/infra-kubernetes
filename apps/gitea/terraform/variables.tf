@@ -32,7 +32,7 @@ variable "http_port" {
 variable "ssh_port" {
   description = "Application internal ssh port"
   type = number
-  default = 22
+  default = 2222
 }
 
 

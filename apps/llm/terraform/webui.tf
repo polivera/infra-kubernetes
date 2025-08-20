@@ -1,6 +1,8 @@
 # apps/llm/terraform/webui-general.tf
 # Open WebUI for General Use - Deployment
 resource "kubernetes_deployment" "webui_general" {
+  count = var.namespace_enabled ? 1 : 0
+
   metadata {
     name      = "webui-general"
     namespace = var.namespace

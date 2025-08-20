@@ -27,7 +27,7 @@ resource "kubernetes_config_map" "gitea" {
       HTTP_PORT        = ${var.http_port}
       ROOT_URL         = https://${local.app_url}/
       DISABLE_SSH      = false
-      SSH_PORT         = 22
+      SSH_PORT         = ${var.ssh_port}
       SSH_LISTEN_PORT  = ${var.ssh_port}
       LFS_START_SERVER = true
       LFS_CONTENT_PATH = /data/git/lfs

@@ -1,6 +1,7 @@
 # apps/llm/terraform/ollama.tf
 # Ollama StatefulSet
 resource "kubernetes_stateful_set" "ollama" {
+  count = var.namespace_enabled ? 1 : 0
   metadata {
     name      = "ollama"
     namespace = var.namespace
@@ -29,8 +30,11 @@ resource "kubernetes_stateful_set" "ollama" {
       spec {
         # Node selector for GPU node (optional)
         node_selector = {
-          "kubernetes.io/hostname" = "gpu-node" # Change to your GPU node name
+          "kubernetes.io/hostname" = "zeratul" # Change to your GPU node name
         }
+
+        # Add runtime class for NVIDIA GPU support
+        runtime_class_name = "nvidia"
 
         container {
           name  = "ollama"
@@ -42,10 +46,15 @@ resource "kubernetes_stateful_set" "ollama" {
           }
 
           # Uncomment if you have GPU available
-          # env {
-          #   name  = "NVIDIA_VISIBLE_DEVICES"
-          #   value = "all"
-          # }
+          env {
+            name  = "NVIDIA_VISIBLE_DEVICES"
+            value = "all"
+          }
+
+          env {
+            name  = "NVIDIA_DRIVER_CAPABILITIES"
+            value = "compute,utility"
+          }
 
           port {
             container_port = var.ollama_port
@@ -66,7 +75,7 @@ resource "kubernetes_stateful_set" "ollama" {
               memory = var.ollama_limit_memory
               cpu    = var.ollama_limit_cpu
               # Uncomment if you have GPU
-              # "nvidia.com/gpu" = "1"
+              "nvidia.com/gpu" = "1"
             }
           }
 

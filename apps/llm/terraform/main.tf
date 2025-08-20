@@ -24,6 +24,5 @@ resource "kubernetes_namespace" "llm" {
 }
 
 locals {
-  coding_app_url = "code.${module.globals.domain}"
   general_app_url = "chat.${module.globals.domain}"
 }

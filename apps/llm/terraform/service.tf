@@ -9,16 +9,6 @@ module "ollama_service" {
   target_port = var.ollama_port
 }
 
-# WebUI Coding Service
-module "webui_coding_service" {
-  source      = "../../../modules/services"
-  name        = "webui-coding"
-  namespace   = var.namespace
-  headless    = false
-  port        = var.webui_port
-  target_port = var.webui_port
-}
-
 # WebUI General Service
 module "webui_general_service" {
   source      = "../../../modules/services"
