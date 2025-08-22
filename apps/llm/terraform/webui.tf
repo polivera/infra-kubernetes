@@ -31,6 +31,19 @@ resource "kubernetes_deployment" "webui_general" {
       }
 
       spec {
+
+        dns_config {
+          nameservers = module.globals.dns_nameservers
+          searches    = module.globals.dns_searches
+          option {
+            name  = "ndots"
+            value = "2"
+          }
+          option {
+            name = "edns0"
+          }
+        }
+
         container {
           name  = "webui-general"
           image = var.webui_image

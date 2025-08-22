@@ -36,6 +36,18 @@ resource "kubernetes_stateful_set" "ollama" {
         # Add runtime class for NVIDIA GPU support
         runtime_class_name = "nvidia"
 
+        dns_config {
+          nameservers = module.globals.dns_nameservers
+          searches    = module.globals.dns_searches
+          option {
+            name  = "ndots"
+            value = "2"
+          }
+          option {
+            name = "edns0"
+          }
+        }
+
         container {
           name  = "ollama"
           image = var.ollama_image

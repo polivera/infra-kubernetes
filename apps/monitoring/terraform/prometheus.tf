@@ -43,6 +43,33 @@ resource "helm_release" "prometheus" {
       alertmanager = {
         enabled = false
       }
+
+      # Add GPU metrics scraping configuration
+      extraScrapeConfigs = <<-EOT
+          # Scrape GPU metrics from existing DCGM exporter in gpu-operator namespace
+          - job_name: 'dcgm-exporter'
+            kubernetes_sd_configs:
+              - role: pod
+                namespaces:
+                  names:
+                    - gpu-operator
+            relabel_configs:
+              # Only scrape pods with the DCGM exporter label
+              - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
+                action: keep
+                regex: nvidia-dcgm-exporter
+              # Use pod IP and port 9400
+              - source_labels: [__meta_kubernetes_pod_ip]
+                target_label: __address__
+                replacement: '${1}:9400'
+              # Add helpful labels
+              - source_labels: [__meta_kubernetes_pod_node_name]
+                target_label: node
+              - source_labels: [__meta_kubernetes_namespace]
+                target_label: kubernetes_namespace
+            scrape_interval: 15s
+            metrics_path: /metrics
+        EOT
     })
   ]
 
@@ -50,4 +77,37 @@ resource "helm_release" "prometheus" {
     kubernetes_namespace.monitoring,
     module.prometheus_storage
   ]
+}
+
+resource "kubernetes_manifest" "dcgm_service_monitor" {
+  count = 0  # Set to 1 if you want to use ServiceMonitor instead
+
+  manifest = {
+    apiVersion = "monitoring.coreos.com/v1"
+    kind       = "ServiceMonitor"
+    metadata = {
+      name      = "dcgm-exporter"
+      namespace = kubernetes_namespace.monitoring.metadata[0].name
+      labels = {
+        app = "dcgm-exporter"
+      }
+    }
+    spec = {
+      selector = {
+        matchLabels = {
+          "app.kubernetes.io/name" = "nvidia-dcgm-exporter"
+        }
+      }
+      namespaceSelector = {
+        matchNames = ["gpu-operator"]
+      }
+      endpoints = [
+        {
+          port     = "metrics"
+          interval = "15s"
+          path     = "/metrics"
+        }
+      ]
+    }
+  }
 }
