@@ -52,7 +52,7 @@ variable "ollama_port" {
 variable "webui_image" {
   description = "Open WebUI Docker image"
   type        = string
-  default     = "ghcr.io/open-webui/open-webui:main"
+  default     = "ghcr.io/open-webui/open-webui:v0.6.25"
 }
 
 variable "webui_request_cpu" {

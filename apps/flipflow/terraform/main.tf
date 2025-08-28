@@ -25,8 +25,12 @@ data "sops_file" "secrets" {
 }
 
 # Create namespace
-resource "kubernetes_namespace" "mysql" {
+resource "kubernetes_namespace" "flipflow" {
   metadata {
     name = var.namespace
   }
+}
+
+locals {
+  druid_app_url = "druid.${module.globals.domain}"
 }

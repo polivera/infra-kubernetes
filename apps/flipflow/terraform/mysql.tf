@@ -1,6 +1,7 @@
 # apps/mysql/terraform/mysql.tf
 # MySQL StatefulSet
 resource "kubernetes_stateful_set" "mysql" {
+  count = var.enable_mysql
   metadata {
     name      = "mysql"
     namespace = var.namespace
@@ -11,7 +12,7 @@ resource "kubernetes_stateful_set" "mysql" {
 
   spec {
     service_name = "mysql-headless"
-    replicas     = var.mysql_replicas
+    replicas     = 1
 
     selector {
       match_labels = {

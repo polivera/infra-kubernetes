@@ -23,6 +23,10 @@ resource "kubernetes_ingress_v1" "ingress" {
     namespace = var.ingress_namespace
     annotations = {
       "nginx.ingress.kubernetes.io/ssl-redirect" = var.ssl_redirect
+      "nginx.ingress.kubernetes.io/proxy-body-size" = var.proxy_body_size
+      "nginx.ingress.kubernetes.io/proxy-connect-timeout" = var.proxy_connect_timeout
+      "nginx.ingress.kubernetes.io/proxy-send-timeout" = var.proxy_send_timeout
+      "nginx.ingress.kubernetes.io/proxy-read-timeout" = var.proxy_read_timeout
     }
   }
 

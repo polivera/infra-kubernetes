@@ -78,6 +78,11 @@ resource "kubernetes_deployment" "webui_general" {
             value = "user"
           }
 
+          env {
+            name  = "FILE_SIZE_LIMIT"
+            value = "100" # Size in MB, adjust as needed
+          }
+
           port {
             container_port = var.webui_port
             name          = "http"

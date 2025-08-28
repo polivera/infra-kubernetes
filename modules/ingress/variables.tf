@@ -33,3 +33,27 @@ variable "ssl_redirect" {
   type = bool
   default = true
 }
+
+variable "proxy_body_size" {
+  description = "Maximum allowed size of the client request body"
+  type        = string
+  default     = "100m"
+}
+
+variable "proxy_connect_timeout" {
+  description = "Timeout for establishing a connection with a proxied server"
+  type        = string
+  default     = "600s"
+}
+
+variable "proxy_send_timeout" {
+  description = "Timeout for transmitting a request to the proxied server"
+  type        = string
+  default     = "600s"
+}
+
+variable "proxy_read_timeout" {
+  description = "Timeout for reading a response from the proxied server"
+  type        = string
+  default     = "600s"
+}

@@ -57,3 +57,28 @@ variable "limit_cpu" {
   type = string
   default = "500"
 }
+
+# Global timeout and upload settings
+variable "proxy_connect_timeout" {
+  description = "Global proxy connect timeout"
+  type        = string
+  default     = "600"
+}
+
+variable "proxy_send_timeout" {
+  description = "Global proxy send timeout"
+  type        = string
+  default     = "600"
+}
+
+variable "proxy_read_timeout" {
+  description = "Global proxy read timeout"
+  type        = string
+  default     = "600"
+}
+
+variable "proxy_body_size" {
+  description = "Global maximum request body size"
+  type        = string
+  default     = "100m"
+}

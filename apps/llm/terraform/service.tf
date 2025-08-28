@@ -5,6 +5,8 @@ module "ollama_service" {
   name        = "ollama"
   namespace   = var.namespace
   headless    = true
+  external    = true
+  external_ip = "192.168.0.123"
   port        = var.ollama_port
   target_port = var.ollama_port
 }

@@ -49,6 +49,16 @@ resource "kubernetes_deployment" "navidrome" {
           }
 
           env {
+            name  = "ND_ENABLELYRICS"
+            value = "true"
+          }
+
+          env {
+            name  = "ND_LYRICSSOURCES"
+            value = "embedded,lrc,txt"
+          }
+
+          env {
             name  = "ND_MUSICFOLDER"
             value = "/music"
           }

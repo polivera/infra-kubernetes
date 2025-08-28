@@ -39,6 +39,27 @@ resource "helm_release" "nginx_ingress" {
       value = var.full_forwarded_for
     },
 
+    # Global timeout settings for file uploads
+    {
+      name  = "controller.config.proxy-connect-timeout"
+      value = var.proxy_connect_timeout
+    },
+
+    {
+      name  = "controller.config.proxy-send-timeout"
+      value = var.proxy_send_timeout
+    },
+
+    {
+      name  = "controller.config.proxy-read-timeout"
+      value = var.proxy_read_timeout
+    },
+
+    {
+      name  = "controller.config.proxy-body-size"
+      value = var.proxy_body_size
+    },
+
     # Resource limits
     {
       name  = "controller.resources.requests.cpu"
