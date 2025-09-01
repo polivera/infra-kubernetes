@@ -44,7 +44,7 @@ resource "kubernetes_deployment" "postgres" {
 
           port {
             container_port = 5432
-            name          = "postgres"
+            name           = "postgres"
           }
 
           resources {
@@ -87,7 +87,7 @@ resource "kubernetes_deployment" "postgres" {
         volume {
           name = "postgres-data"
           persistent_volume_claim {
-            claim_name = module.postgres_storage.pvc_name
+            claim_name = module.postgres_storage[0].pvc_name
           }
         }
       }

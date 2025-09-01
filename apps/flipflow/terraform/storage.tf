@@ -10,6 +10,7 @@ module "mysql_storage" {
 }
 
 module "postgres_storage" {
+  count      = var.enable_postgres
   source     = "../../../modules/static-nfs-volume"
   app_name   = "druid-postgres"
   namespace  = kubernetes_namespace.flipflow.metadata[0].name
@@ -19,6 +20,7 @@ module "postgres_storage" {
 }
 
 module "druid_shared_storage" {
+  count      = var.enable_druid
   source     = "../../../modules/static-nfs-volume"
   app_name   = "druid-shared"
   namespace  = kubernetes_namespace.flipflow.metadata[0].name
@@ -28,6 +30,7 @@ module "druid_shared_storage" {
 }
 
 module "druid_historical_storage" {
+  count      = var.enable_druid
   source     = "../../../modules/static-nfs-volume"
   app_name   = "druid-historical"
   namespace  = kubernetes_namespace.flipflow.metadata[0].name
@@ -37,6 +40,7 @@ module "druid_historical_storage" {
 }
 
 module "druid_middlemanager_storage" {
+  count      = var.enable_druid
   source     = "../../../modules/static-nfs-volume"
   app_name   = "druid-middlemanager"
   namespace  = kubernetes_namespace.flipflow.metadata[0].name

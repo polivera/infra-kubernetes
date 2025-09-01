@@ -37,7 +37,7 @@ resource "kubernetes_deployment" "druid_coordinator" {
 
           port {
             container_port = 8081
-            name          = "http"
+            name           = "http"
           }
 
           env {
@@ -121,7 +121,7 @@ resource "kubernetes_deployment" "druid_coordinator" {
         volume {
           name = "shared-data"
           persistent_volume_claim {
-            claim_name = module.druid_shared_storage.pvc_name
+            claim_name = module.druid_shared_storage[0].pvc_name
           }
         }
       }
@@ -174,7 +174,7 @@ resource "kubernetes_deployment" "druid_broker" {
 
           port {
             container_port = 8082
-            name          = "http"
+            name           = "http"
           }
 
           resources {
@@ -245,7 +245,7 @@ resource "kubernetes_deployment" "druid_broker" {
         volume {
           name = "shared-data"
           persistent_volume_claim {
-            claim_name = module.druid_shared_storage.pvc_name
+            claim_name = module.druid_shared_storage[0].pvc_name
           }
         }
       }
@@ -295,7 +295,7 @@ resource "kubernetes_deployment" "druid_historical" {
 
           port {
             container_port = 8083
-            name          = "http"
+            name           = "http"
           }
 
           resources {
@@ -372,14 +372,14 @@ resource "kubernetes_deployment" "druid_historical" {
         volume {
           name = "shared-data"
           persistent_volume_claim {
-            claim_name = module.druid_shared_storage.pvc_name
+            claim_name = module.druid_shared_storage[0].pvc_name
           }
         }
 
         volume {
           name = "segment-cache"
           persistent_volume_claim {
-            claim_name = module.druid_historical_storage.pvc_name
+            claim_name = module.druid_historical_storage[0].pvc_name
           }
         }
       }
@@ -430,7 +430,7 @@ resource "kubernetes_deployment" "druid_middlemanager" {
 
           port {
             container_port = 8091
-            name          = "http"
+            name           = "http"
           }
 
           resources {
@@ -502,14 +502,14 @@ resource "kubernetes_deployment" "druid_middlemanager" {
         volume {
           name = "shared-data"
           persistent_volume_claim {
-            claim_name = module.druid_shared_storage.pvc_name
+            claim_name = module.druid_shared_storage[0].pvc_name
           }
         }
 
         volume {
           name = "task-data"
           persistent_volume_claim {
-            claim_name = module.druid_middlemanager_storage.pvc_name
+            claim_name = module.druid_middlemanager_storage[0].pvc_name
           }
         }
       }
@@ -560,7 +560,7 @@ resource "kubernetes_deployment" "druid_router" {
 
           port {
             container_port = var.druid_router_port
-            name          = "http"
+            name           = "http"
           }
 
           resources {

@@ -1,4 +1,5 @@
 module "druid_ingress" {
+  count  = var.enable_druid
   source = "../../../modules/ingress"
 
   cert_secret       = module.globals.cert_secret_name

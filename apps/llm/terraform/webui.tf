@@ -31,7 +31,6 @@ resource "kubernetes_deployment" "webui_general" {
       }
 
       spec {
-
         dns_config {
           nameservers = module.globals.dns_nameservers
           searches    = module.globals.dns_searches
@@ -85,7 +84,7 @@ resource "kubernetes_deployment" "webui_general" {
 
           port {
             container_port = var.webui_port
-            name          = "http"
+            name           = "http"
           }
 
           volume_mount {
