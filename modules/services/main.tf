@@ -63,7 +63,7 @@ resource "kubernetes_service" "this-external" {
     port {
       name        = var.name
       port        = var.port
-      target_port = var.port
+      target_port = var.target_port
       protocol    = "TCP"
     }
 

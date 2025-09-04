@@ -13,7 +13,7 @@ terraform {
 }
 
 module "globals" {
-  source = "../../../modules/globals"
+  source = "../../../../../modules/globals"
 }
 
 provider "kubernetes" {
@@ -21,11 +21,11 @@ provider "kubernetes" {
 }
 
 data "sops_file" "secrets" {
-  source_file = module.globals.sops_file_path
+  source_file = "../${module.globals.sops_file_path}"
 }
 
 # Reference existing namespace - DON'T CREATE IT
-data "kubernetes_namespace" "flipflow" {
+data "kubernetes_namespace" "mysql" {
   metadata {
     name = "flipflow"
   }
