@@ -1,54 +1,54 @@
-# apps/mysql/terraform/variables.tf
+# apps/MongoDB/terraform/variables.tf
 variable "namespace" {
   description = "Flipflow namespace"
   type        = string
   default     = "flipflow"
 }
 
-variable "mysql_image" {
-  description = "MySQL Image"
+variable "mongodb_image" {
+  description = "MongoDB Image"
   type        = string
-  default     = "mongo:7.0"
+  default     = "mongo:4.2-bionic"
 }
 
-variable "mysql_request_storage" {
+variable "mongodb_request_storage" {
   description = "Request storage for pv and pvc"
   type        = string
   default     = "20Gi"
 }
 
-variable "mysql_request_cpu" {
+variable "mongodb_request_cpu" {
   description = "Request CPU for container"
   type        = string
   default     = "250m"
 }
 
-variable "mysql_request_memory" {
+variable "mongodb_request_memory" {
   description = "Request Memory for container"
   type        = string
   default     = "512Mi"
 }
 
-variable "mysql_limit_cpu" {
+variable "mongodb_limit_cpu" {
   description = "Limit CPU for container"
   type        = string
   default     = "1000m"
 }
 
-variable "mysql_limit_memory" {
+variable "mongodb_limit_memory" {
   description = "Limit Memory for container"
   type        = string
   default     = "2Gi"
 }
 
-variable "mysql_port" {
-  description = "MySQL Port"
+variable "mongodb_port" {
+  description = "MongoDB Port"
   type        = number
   default     = 27017
 }
 
-variable "mysql_external_port" {
-  description = "MySQL Port"
+variable "mongodb_external_port" {
+  description = "MongoDB Port"
   type        = number
-  default     = 11875
+  default     = 11876
 }
