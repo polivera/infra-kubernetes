@@ -9,7 +9,7 @@ variable "acme_server" {
   type        = string
   #default     = "https://acme-v02.api.letsencrypt.org/directory"
   # Use this for testing:
-  default     = "https://acme-staging-v02.api.letsencrypt.org/directory"
+  default = "https://acme-staging-v02.api.letsencrypt.org/directory"
 }
 
 variable "dns_names" {

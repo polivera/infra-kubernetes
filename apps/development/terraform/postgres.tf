@@ -59,7 +59,7 @@ resource "kubernetes_stateful_set" "postgres_dev" {
 
           port {
             container_port = var.postgres_port
-            name          = "postgres"
+            name           = "postgres"
           }
 
           volume_mount {

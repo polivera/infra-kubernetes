@@ -9,7 +9,7 @@ variable "image" {
   description = "Kavita Docker image"
   type        = string
   #default     = "kizaing/kavita:latest"
-  default     = "jvmilazz0/kavita:latest"
+  default = "jvmilazz0/kavita:latest"
 }
 
 variable "replicas" {

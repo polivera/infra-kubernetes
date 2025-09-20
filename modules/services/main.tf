@@ -54,7 +54,7 @@ resource "kubernetes_service" "this-external" {
   }
 
   spec {
-    type = "LoadBalancer"
+    type = var.external_service_type
 
     selector = {
       app = var.name
@@ -64,7 +64,7 @@ resource "kubernetes_service" "this-external" {
       name        = var.name
       port        = var.port
       target_port = var.target_port
-      protocol    = "TCP"
+      protocol    = var.external_port_protocol
     }
 
     load_balancer_source_ranges = var.external_allowed_cdir

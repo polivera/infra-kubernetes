@@ -92,8 +92,8 @@ resource "kubectl_manifest" "wildcard_certificate" {
         name = var.cluster_issuer_name
         kind = "ClusterIssuer"
       }
-      dnsNames = var.dns_names
-      duration = "2160h"    # 90 days
+      dnsNames    = var.dns_names
+      duration    = "2160h" # 90 days
       renewBefore = "360h"  # 15 days before expiry
     }
   })

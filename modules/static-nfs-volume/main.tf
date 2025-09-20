@@ -11,9 +11,9 @@ locals {
   app_folder = title(var.app_name)
 
   # Build full path
-  sub_path = var.subpath != "" ? "${local.pool_paths[var.pool]}/${local.app_folder}/${var.subpath}" : "${local.pool_paths[var.pool]}/${local.app_folder}"
+  sub_path   = var.subpath != "" ? "${local.pool_paths[var.pool]}/${local.app_folder}/${var.subpath}" : "${local.pool_paths[var.pool]}/${local.app_folder}"
   force_path = var.force_path != "" ? "${local.pool_paths[var.pool]}/${var.force_path}" : ""
-  nfs_path = local.force_path != "" ? local.force_path : local.sub_path
+  nfs_path   = local.force_path != "" ? local.force_path : local.sub_path
 
   # Consistent naming convention
   pv_name  = "${var.app_name}-${var.pool}-pv"

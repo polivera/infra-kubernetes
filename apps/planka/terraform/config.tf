@@ -6,7 +6,7 @@ resource "kubernetes_config_map" "planka" {
 
   data = {
     # Server configuration
-    BASE_URL = "https://${local.app_url}"
+    BASE_URL    = "https://${local.app_url}"
     TRUST_PROXY = "0"
 
     # Database configuration (using existing PostgreSQL)
@@ -14,15 +14,15 @@ resource "kubernetes_config_map" "planka" {
 
     # File uploads
     ATTACHMENTS_DESTINATION = "local"
-    ATTACHMENTS_LOCAL_PATH = "/app/public/user-content/attachments"
+    ATTACHMENTS_LOCAL_PATH  = "/app/public/user-content/attachments"
 
     # Project background images
     PROJECT_BACKGROUND_IMAGES_DESTINATION = "local"
-    PROJECT_BACKGROUND_IMAGES_LOCAL_PATH = "/app/public/user-content/project-background-images"
+    PROJECT_BACKGROUND_IMAGES_LOCAL_PATH  = "/app/public/user-content/project-background-images"
 
     # User avatars
     USER_AVATARS_DESTINATION = "local"
-    USER_AVATARS_LOCAL_PATH = "/app/public/user-content/user-avatars"
+    USER_AVATARS_LOCAL_PATH  = "/app/public/user-content/user-avatars"
 
     # Session configuration
     SESSION_SECRET = "" # Will be overridden by secret

@@ -74,7 +74,7 @@ resource "kubernetes_stateful_set" "mysql" {
 
           port {
             container_port = var.mysql_port
-            name          = "mysql"
+            name           = "mysql"
           }
 
           volume_mount {

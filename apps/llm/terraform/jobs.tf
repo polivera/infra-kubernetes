@@ -52,7 +52,7 @@ resource "kubernetes_job_v1" "model_setup" {
       }
     }
 
-    backoff_limit = 3
+    backoff_limit              = 3
     ttl_seconds_after_finished = 3600
   }
 

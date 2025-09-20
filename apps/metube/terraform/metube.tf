@@ -64,7 +64,7 @@ resource "kubernetes_deployment" "metube" {
 
           port {
             container_port = var.port
-            name          = "http"
+            name           = "http"
           }
 
           volume_mount {

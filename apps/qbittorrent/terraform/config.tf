@@ -6,9 +6,9 @@ resource "kubernetes_config_map" "qbittorrent" {
   }
 
   data = {
-    PUID     = var.puid
-    PGID     = var.pgid
-    TZ       = var.timezone
+    PUID       = var.puid
+    PGID       = var.pgid
+    TZ         = var.timezone
     WEBUI_PORT = tostring(var.web_port)
   }
 }

@@ -34,7 +34,7 @@ resource "kubernetes_stateful_set" "redis_dev" {
 
           port {
             container_port = var.redis_port
-            name          = "redis"
+            name           = "redis"
           }
 
           volume_mount {

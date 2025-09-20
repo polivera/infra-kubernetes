@@ -127,7 +127,7 @@ resource "kubernetes_stateful_set" "homeassistant" {
             initial_delay_seconds = 10
             period_seconds        = 10
             timeout_seconds       = 5
-            failure_threshold     = 60  # Home Assistant can take time to start
+            failure_threshold     = 60 # Home Assistant can take time to start
           }
         }
 

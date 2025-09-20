@@ -17,7 +17,7 @@ resource "kubernetes_cron_job_v1" "postgres_backup" {
     timezone                      = module.globals.timezone
     successful_jobs_history_limit = 3
     failed_jobs_history_limit     = 3
-    concurrency_policy           = "Forbid"
+    concurrency_policy            = "Forbid"
 
     job_template {
       metadata {
@@ -29,7 +29,7 @@ resource "kubernetes_cron_job_v1" "postgres_backup" {
       }
 
       spec {
-        backoff_limit = 3
+        backoff_limit              = 3
         ttl_seconds_after_finished = 86400 # 24 hours
 
         template {

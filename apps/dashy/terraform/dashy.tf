@@ -46,7 +46,7 @@ resource "kubernetes_deployment" "dashy" {
 
           port {
             container_port = var.port
-            name          = "http"
+            name           = "http"
           }
 
           volume_mount {

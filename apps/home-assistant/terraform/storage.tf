@@ -5,6 +5,6 @@ module "homeassistant_storage" {
   app_name   = kubernetes_namespace.homeassistant.metadata[0].name
   namespace  = kubernetes_namespace.homeassistant.metadata[0].name
   size       = var.config_storage
-  pool       = var.storage_pool  # Default: slow storage
+  pool       = var.storage_pool # Default: slow storage
   force_path = "HomeAssistant/config"
 }

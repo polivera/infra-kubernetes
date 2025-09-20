@@ -141,7 +141,7 @@ resource "kubernetes_deployment" "docmost" {
 
           port {
             container_port = var.port
-            name          = "http"
+            name           = "http"
           }
 
           volume_mount {

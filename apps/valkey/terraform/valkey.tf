@@ -10,7 +10,7 @@ resource "kubernetes_stateful_set" "valkey" {
 
   spec {
     service_name = "valkey-headless"
-    replicas = var.replicas
+    replicas     = var.replicas
 
     selector {
       match_labels = {
@@ -34,7 +34,7 @@ resource "kubernetes_stateful_set" "valkey" {
 
           port {
             container_port = var.port
-            name          = "valkey"
+            name           = "valkey"
           }
 
           volume_mount {

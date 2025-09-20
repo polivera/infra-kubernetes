@@ -17,7 +17,7 @@ module "grafana_ingress" {
 
 # Optional: Ingress for Prometheus
 module "prometheus_ingress" {
-  count = local.enable_prometheus
+  count  = local.enable_prometheus
   source = "../../../modules/ingress"
 
   cert_secret       = module.globals.cert_secret_name

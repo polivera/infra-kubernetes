@@ -11,8 +11,8 @@ locals {
   nfs_server        = "192.168.0.11"
 
   # DNS Configuration - Confirmed from kubectl get svc -n kube-system
-  cluster_dns       = "10.43.0.10"  # K3s kube-dns service IP
-  external_dns      = "192.168.0.1" # Your router/external DNS
-  dns_nameservers   = [local.cluster_dns, local.external_dns]
-  dns_searches      = ["svc.cluster.local", "cluster.local"]
+  cluster_dns     = "10.43.0.10"  # K3s kube-dns service IP
+  external_dns    = "192.168.0.1" # Your router/external DNS
+  dns_nameservers = [local.cluster_dns, local.external_dns]
+  dns_searches    = ["svc.cluster.local", "cluster.local"]
 }

@@ -113,5 +113,5 @@ resource "kubernetes_deployment" "heimdall" {
     }
   }
 
-  depends_on =  [module.heimdall_config_storage]
+  depends_on = [module.heimdall_config_storage]
 }

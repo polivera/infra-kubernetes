@@ -11,7 +11,7 @@ resource "kubernetes_stateful_set" "searxng" {
 
   spec {
     service_name = "searxng-headless"
-    replicas = 1
+    replicas     = 1
 
     selector {
       match_labels = {
@@ -59,7 +59,7 @@ resource "kubernetes_stateful_set" "searxng" {
 
           port {
             container_port = var.port
-            name          = "http"
+            name           = "http"
           }
 
           volume_mount {

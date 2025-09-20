@@ -1,49 +1,49 @@
 variable "namespace" {
   description = "Postgres namespace"
-  type = string
-  default = "postgres"
+  type        = string
+  default     = "postgres"
 }
 
 variable "image" {
   description = "Postgres Image"
-  type = string
-  default = "postgres:17"
+  type        = string
+  default     = "postgres:17"
 }
 
 variable "request_storage" {
   description = "Request storage for pv and pvc"
-  type = string
-  default = "10Gi"
+  type        = string
+  default     = "10Gi"
 }
 
 variable "request_cpu" {
   description = "Request CPU for container"
-  type = string
-  default = "300m"
+  type        = string
+  default     = "300m"
 }
 
 variable "request_memory" {
   description = "Request Memory for container"
-  type = string
-  default = "512Mi"
+  type        = string
+  default     = "512Mi"
 }
 
 variable "limit_cpu" {
   description = "Limit CPU for container"
-  type = string
-  default = "1000m"
+  type        = string
+  default     = "1000m"
 }
 
 variable "limit_memory" {
   description = "Limit Memory for container"
-  type = string
-  default = "2Gi"
+  type        = string
+  default     = "2Gi"
 }
 
 variable "port" {
   description = "Postgres Port"
-  type = string
-  default = 5432
+  type        = string
+  default     = 5432
 }
 
 

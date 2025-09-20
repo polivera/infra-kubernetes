@@ -137,7 +137,7 @@ resource "kubernetes_config_map" "druid_coordinator" {
       druid.coordinator.startDelay=PT30S
       druid.coordinator.period=PT30S
     EOF
-    "jvm.config" = <<-EOF
+    "jvm.config"         = <<-EOF
       -server
       -Xms1g
       -Xmx1g
@@ -170,7 +170,7 @@ resource "kubernetes_config_map" "druid_broker" {
       druid.broker.http.numConnections=5
       druid.broker.http.compressionCodec=gzip
     EOF
-    "jvm.config" = <<-EOF
+    "jvm.config"         = <<-EOF
       -server
       -Xms1g
       -Xmx1g
@@ -204,7 +204,7 @@ resource "kubernetes_config_map" "druid_historical" {
       druid.segmentCache.locations=[{"path":"/opt/shared/segment-cache","maxSize":"300m"}]
       druid.server.maxSize=300m
     EOF
-    "jvm.config" = <<-EOF
+    "jvm.config"         = <<-EOF
       -server
       -Xms1g
       -Xmx1g
@@ -239,7 +239,7 @@ resource "kubernetes_config_map" "druid_middlemanager" {
       druid.indexer.task.hadoopWorkingPath=var/druid/hadoop-tmp
       druid.indexer.task.defaultHadoopCoordinates=["org.apache.hadoop:hadoop-client:2.8.5"]
     EOF
-    "jvm.config" = <<-EOF
+    "jvm.config"         = <<-EOF
       -server
       -Xms1g
       -Xmx1g
@@ -275,7 +275,7 @@ resource "kubernetes_config_map" "druid_router" {
       # Management proxy to coordinator / overlord: required for access to the web console
       druid.router.managementProxy.enabled=true
     EOF
-    "jvm.config" = <<-EOF
+    "jvm.config"         = <<-EOF
       -server
       -Xms512m
       -Xmx512m

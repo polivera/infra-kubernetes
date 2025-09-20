@@ -43,7 +43,7 @@ resource "kubernetes_deployment" "paperless" {
           }
 
           env {
-            name = "PAPERLESS_DBENGINE"
+            name  = "PAPERLESS_DBENGINE"
             value = "postgresql"
           }
 
@@ -160,7 +160,7 @@ resource "kubernetes_deployment" "paperless" {
           }
 
           env {
-            name  = "PAPERLESS_DBHOST"
+            name = "PAPERLESS_DBHOST"
             value_from {
               secret_key_ref {
                 name = kubernetes_secret.paperless.metadata[0].name
@@ -170,7 +170,7 @@ resource "kubernetes_deployment" "paperless" {
           }
 
           env {
-            name  = "PAPERLESS_DBNAME"
+            name = "PAPERLESS_DBNAME"
             value_from {
               secret_key_ref {
                 name = kubernetes_secret.paperless.metadata[0].name
@@ -180,7 +180,7 @@ resource "kubernetes_deployment" "paperless" {
           }
 
           env {
-            name  = "PAPERLESS_DBUSER"
+            name = "PAPERLESS_DBUSER"
             value_from {
               secret_key_ref {
                 name = kubernetes_secret.paperless.metadata[0].name
@@ -190,7 +190,7 @@ resource "kubernetes_deployment" "paperless" {
           }
 
           env {
-            name  = "PAPERLESS_DBPASS"
+            name = "PAPERLESS_DBPASS"
             value_from {
               secret_key_ref {
                 name = kubernetes_secret.paperless.metadata[0].name
@@ -221,7 +221,7 @@ resource "kubernetes_deployment" "paperless" {
 
           port {
             container_port = var.port
-            name          = "http"
+            name           = "http"
           }
 
           volume_mount {

@@ -5,10 +5,10 @@ resource "kubernetes_secret" "docmost" {
   }
   type = "Opaque"
   data = {
-    app-secret            = local.secrets.docmost_app_secret
-    database-url          = local.secrets.docmost_database_url
-    redis-url             = local.secrets.docmost_redis_url
-    mail-user             = local.secrets.docmost_mail_user
-    mail-password         = local.secrets.docmost_mail_password
+    app-secret    = local.secrets.docmost_app_secret
+    database-url  = local.secrets.docmost_database_url
+    redis-url     = local.secrets.docmost_redis_url
+    mail-user     = local.secrets.docmost_mail_user
+    mail-password = local.secrets.docmost_mail_password
   }
 }

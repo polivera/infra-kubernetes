@@ -85,20 +85,20 @@ resource "kubernetes_stateful_set" "qbittorrent" {
 
           port {
             container_port = var.web_port
-            name          = "webui"
-            protocol      = "TCP"
+            name           = "webui"
+            protocol       = "TCP"
           }
 
           port {
             container_port = var.torrent_port
-            name          = "torrent-tcp"
-            protocol      = "TCP"
+            name           = "torrent-tcp"
+            protocol       = "TCP"
           }
 
           port {
             container_port = var.torrent_port
-            name          = "torrent-udp"
-            protocol      = "UDP"
+            name           = "torrent-udp"
+            protocol       = "UDP"
           }
 
           volume_mount {

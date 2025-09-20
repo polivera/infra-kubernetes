@@ -1,7 +1,7 @@
 # monitoring/terraform/prometheus.tf
 # Install Prometheus
 resource "helm_release" "prometheus" {
-  count = local.enable_prometheus
+  count      = local.enable_prometheus
   name       = "prometheus"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart      = "prometheus"
@@ -80,7 +80,7 @@ resource "helm_release" "prometheus" {
 }
 
 resource "kubernetes_manifest" "dcgm_service_monitor" {
-  count = 0  # Set to 1 if you want to use ServiceMonitor instead
+  count = 0 # Set to 1 if you want to use ServiceMonitor instead
 
   manifest = {
     apiVersion = "monitoring.coreos.com/v1"

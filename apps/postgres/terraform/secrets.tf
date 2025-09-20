@@ -9,7 +9,7 @@ resource "kubernetes_secret" "postgres" {
   }
   type = "Opaque"
   data = {
-    postgres-user = local.secrets.postgres_user
+    postgres-user     = local.secrets.postgres_user
     postgres-password = local.secrets.postgres_password
   }
 }

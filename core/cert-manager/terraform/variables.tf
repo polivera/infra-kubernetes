@@ -1,7 +1,7 @@
 variable "namespace" {
   description = "Cert Manager Namespace"
-  type = string
-  default = "cert-manager"
+  type        = string
+  default     = "cert-manager"
 }
 
 variable "acme_server" {
@@ -20,14 +20,14 @@ variable "dns_names" {
 
 variable "cluster_dns" {
   description = "Cluster DNS IP"
-  type = string
-  default = "10.43.0.10"
+  type        = string
+  default     = "10.43.0.10"
 }
 
 variable "external_dns" {
   description = "Network level dns server"
-  type = string
-  default = "192.168.0.1"
+  type        = string
+  default     = "192.168.0.1"
 }
 
 variable "cluster_issuer_name" {

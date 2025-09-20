@@ -3,8 +3,8 @@
 output "postgres_connection_info" {
   description = "PostgreSQL connection information"
   value = {
-    external_ip    = var.postgres_external_ip
-    internal_host  = "postgres-dev.development.svc.cluster.local"
+    external_ip   = var.postgres_external_ip
+    internal_host = "postgres-dev.development.svc.cluster.local"
     port          = var.postgres_port
   }
 }
@@ -14,7 +14,7 @@ output "redis_connection_info" {
   value = {
     external_ip   = var.redis_external_ip
     internal_host = "redis-dev.development.svc.cluster.local"
-    port         = var.redis_port
+    port          = var.redis_port
   }
 }
 

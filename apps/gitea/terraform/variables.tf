@@ -25,14 +25,14 @@ variable "ssh_external_ip" {
 
 variable "http_port" {
   description = "Application internal web port"
-  type = number
-  default = 3000
+  type        = number
+  default     = 3000
 }
 
 variable "ssh_port" {
   description = "Application internal ssh port"
-  type = number
-  default = 2222
+  type        = number
+  default     = 2222
 }
 
 

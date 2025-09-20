@@ -70,7 +70,7 @@ resource "kubernetes_stateful_set" "ollama" {
 
           port {
             container_port = var.ollama_port
-            name          = "api"
+            name           = "api"
           }
 
           volume_mount {

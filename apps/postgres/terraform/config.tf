@@ -4,6 +4,6 @@ resource "kubernetes_config_map" "postgres" {
     namespace = var.namespace
   }
   data = {
-    POSTGRES_DB   = "postgres"
+    POSTGRES_DB = "postgres"
   }
 }
