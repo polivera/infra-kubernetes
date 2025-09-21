@@ -1,0 +1,7 @@
+#!/usr/bin/env just --justfile
+
+encrypt:
+    sops -e secrets.yaml > secrets.enc.yaml
+
+decrypt:
+    sops -d secrets.enc.yaml > secrets.yaml
