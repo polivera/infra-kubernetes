@@ -1,4 +1,4 @@
-resource "kubernetes_deployment" "this" {
+resource "kubernetes_stateful_set" "this" {
   metadata {
     name      = coalesce(var.app_name, var.namespace)
     namespace = var.namespace
@@ -8,7 +8,8 @@ resource "kubernetes_deployment" "this" {
   }
 
   spec {
-    replicas = var.replicas
+    service_name = coalesce(var.service_name, var.namespace)
+    replicas     = var.replicas
 
     selector {
       match_labels = {
@@ -132,9 +133,8 @@ resource "kubernetes_deployment" "this" {
           dynamic "readiness_probe" {
             for_each = var.command_probe != null ? [1] : []
             content {
-              http_get {
-                path = var.http_probe
-                port = var.port
+              exec {
+                command = var.command_probe
               }
               initial_delay_seconds = 30
               period_seconds        = 10
@@ -144,9 +144,8 @@ resource "kubernetes_deployment" "this" {
           dynamic "liveness_probe" {
             for_each = var.command_probe != null ? [1] : []
             content {
-              http_get {
-                path = var.http_probe
-                port = var.port
+              exec {
+                command = var.command_probe
               }
               initial_delay_seconds = 30
               period_seconds        = 10

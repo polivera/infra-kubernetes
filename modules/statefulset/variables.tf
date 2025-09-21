@@ -8,6 +8,11 @@ variable "app_name" {
   type        = string
 }
 
+variable "service_name" {
+  description = "Name of the stateful service"
+  type = string
+}
+
 variable "image" {
   description = "Deployment image"
   type        = string

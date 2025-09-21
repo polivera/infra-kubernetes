@@ -7,7 +7,7 @@ variable "namespace" {
 variable "image" {
   description = "Postgres Image"
   type        = string
-  default     = "postgres:17"
+  default     = "postgres:17.6"
 }
 
 variable "request_storage" {
@@ -45,7 +45,6 @@ variable "port" {
   type        = string
   default     = 5432
 }
-
 
 # Backup Configuration Variables
 variable "backup_schedule" {

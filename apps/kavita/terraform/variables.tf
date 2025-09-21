@@ -12,12 +12,6 @@ variable "image" {
   default = "jvmilazz0/kavita:latest"
 }
 
-variable "replicas" {
-  description = "Number of Kavita replicas"
-  type        = number
-  default     = 1
-}
-
 variable "config_storage" {
   description = "Storage size for Kavita config"
   type        = string

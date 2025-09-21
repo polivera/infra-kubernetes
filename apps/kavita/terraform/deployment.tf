@@ -6,7 +6,11 @@ module "kavita_deployment" {
   image     = var.image
   namespace = var.namespace
   port      = var.port
-  env_configs = {
+  request_cpu = var.request_cpu
+  request_memory = var.request_memory
+  limit_cpu = var.limit_cpu
+  limit_memory = var.limit_memory
+  envs = {
     TZ = {
       value = module.globals.timezone
     }
