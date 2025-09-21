@@ -4,6 +4,7 @@ locals {
 }
 
 module "kavita_ingress" {
+  count = 0
   source            = "../../../modules/ingress"
   cert_secret       = module.globals.cert_secret_name
   external_name     = "kavita.kavita.svc.cluster.local"
@@ -13,6 +14,6 @@ module "kavita_ingress" {
   port              = var.port
 
   depends_on = [
-    kubernetes_deployment.kavita
+    module.kavita_deployment
   ]
 }

@@ -4,3 +4,4 @@ secrets.yaml
 secrets.yml
 .terraform/
 terraform.tfstate*
+planfile

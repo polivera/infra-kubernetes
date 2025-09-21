@@ -24,10 +24,9 @@ resource "kubernetes_deployment" "this" {
       }
 
       spec {
-
         node_selector = var.gpu_node_hostname != "" ? {
           "kubernetes.io/hostname" = var.gpu_node_hostname
-        } : null
+        } : {}
 
         dns_config {
           nameservers = var.dns_nameserver
@@ -121,6 +120,11 @@ resource "kubernetes_deployment" "this" {
             }
           }
         }
+
+        # TODO: Add this
+        # security_context {
+        #   fs_group = 1000
+        # }
       }
     }
   }

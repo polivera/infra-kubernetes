@@ -28,7 +28,6 @@ resource "helm_release" "metallb" {
 # After that uncomment the rest of the file
 # ------------------------------------------------------------------------
 
-
 # MetalLB IP Address Pool
 resource "kubernetes_manifest" "metallb_ip_pool" {
   manifest = {

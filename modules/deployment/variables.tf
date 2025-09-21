@@ -101,5 +101,5 @@ variable "limit_cpu" {
 variable "gpu_node_hostname" {
   description = "Hostname of the GPU node"
   type        = string
-  default     = "zeratul"
+  default     = ""
 }

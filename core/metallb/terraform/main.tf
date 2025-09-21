@@ -12,7 +12,7 @@ terraform {
 }
 
 module "globals" {
-  source = "../../modules/globals"
+  source = "../../../modules/globals"
 }
 
 provider "kubernetes" {
