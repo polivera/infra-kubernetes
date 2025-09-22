@@ -27,9 +27,11 @@ resource "kubernetes_config_map" "mysql" {
       max_connections = 200
       max_connect_errors = 100000
 
-      # Query cache
-      query_cache_type = 1
-      query_cache_size = 64M
+      # Performance Schema (replaces query cache functionality)
+      performance_schema = ON
+      performance_schema_consumer_events_statements_current = ON
+      performance_schema_consumer_events_statements_history = ON
+      performance_schema_consumer_events_statements_history_long = ON
 
       # Logging
       slow_query_log = 1
@@ -42,6 +44,16 @@ resource "kubernetes_config_map" "mysql" {
 
       # Security
       local-infile = 0
+
+      # MySQL 8.0 specific optimizations
+      # Better join optimization
+      optimizer_switch = 'index_merge=on,index_merge_union=on,index_merge_sort_union=on,index_merge_intersection=on,engine_condition_pushdown=on,index_condition_pushdown=on,mrr=on,mrr_cost_based=on,block_nested_loop=on,batched_key_access=off,materialization=on,semijoin=on,loosescan=on,firstmatch=on,duplicateweedout=on,subquery_materialization_cost_based=on,use_index_extensions=on,condition_fanout_filter=on,derived_merge=on,use_invisible_indexes=off,skip_scan=on,hash_join=on'
+
+      # Adaptive hash index (InnoDB)
+      innodb_adaptive_hash_index = ON
+
+      # Parallel query execution (MySQL 8.0.14+)
+      innodb_parallel_read_threads = 4
     EOF
   }
 }

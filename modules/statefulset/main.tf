@@ -171,15 +171,24 @@ resource "kubernetes_stateful_set" "this" {
           content {
             name = volume.value.name
             config_map {
-              claim_name = volume.value.config_name
+              name = volume.value.config_name
+              dynamic "items" {
+                for_each = volume.value.items != null ? [1] : []
+                content {
+                  key  =  volume.value.items.key
+                  path =  volume.value.items.path
+                }
+              }
             }
           }
         }
 
-        # TODO: Add this
-        # security_context {
-        #   fs_group = 1000
-        # }
+        dynamic "security_context" {
+          for_each = var.security_context != null ? [1] : []
+          content {
+            fs_group = var.security_context.fs_group
+          }
+        }
       }
     }
   }

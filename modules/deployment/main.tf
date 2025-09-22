@@ -165,10 +165,12 @@ resource "kubernetes_deployment" "this" {
           }
         }
 
-        # TODO: Add this
-        # security_context {
-        #   fs_group = 1000
-        # }
+        dynamic "security_context" {
+          for_each = var.security_context != null ? [1] : []
+          content {
+            fs_group = var.security_context.fs_group
+          }
+        }
       }
     }
   }

@@ -134,3 +134,11 @@ variable "gpu_node_hostname" {
   type        = string
   default     = ""
 }
+
+variable "security_context" {
+  description = "Security context configuration"
+  type = object({
+    fs_group = number
+  })
+  default = null
+}

@@ -96,6 +96,14 @@ variable "volume_configs" {
   type = list(object({
     name        = string
     config_name = string
+    items = optional(
+      object(
+        {
+          key  = string
+          path = string
+        }
+      )
+    )
   }))
 }
 
@@ -140,6 +148,14 @@ variable "limit_cpu" {
   description = "CPU limit"
   type        = string
   default     = "500m"
+}
+
+variable "security_context" {
+  description = "Security context configuration"
+  type = object({
+    fs_group = number
+  })
+  default = null
 }
 
 variable "gpu_node_hostname" {

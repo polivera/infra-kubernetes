@@ -8,3 +8,12 @@ module "mysql_storage" {
   pool       = "fast"
   force_path = "Databases/mysql"
 }
+
+module "mysql_backup" {
+  source     = "../../../modules/static-nfs-volume"
+  app_name   = "${kubernetes_namespace.mysql.metadata[0].name}-backup"
+  namespace  = kubernetes_namespace.mysql.metadata[0].name
+  size       = var.request_storage
+  pool       = "slow"
+  force_path = "Backups/mysql"
+}
