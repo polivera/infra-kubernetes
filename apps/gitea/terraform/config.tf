@@ -35,8 +35,8 @@ resource "kubernetes_config_map" "gitea" {
 
       [database]
       PATH     = /data/gitea/gitea.db
-      DB_TYPE  = postgres
-      HOST     = postgres.postgres:5432
+      DB_TYPE  = mysql
+      HOST     = mysql.mysql:3306
       NAME     = gitea
       USER     = ugitea
       PASSWD   =

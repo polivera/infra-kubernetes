@@ -8,26 +8,15 @@ module "gitea_service" {
   target_port = var.http_port
 }
 
-# SSH Service (LoadBalancer for external Git access)
-resource "kubernetes_service" "gitea_ssh" {
-  metadata {
-    name      = "gitea-ssh"
-    namespace = var.namespace
-    annotations = {
-      "metallb.universe.tf/loadBalancerIPs" = var.ssh_external_ip
-    }
-  }
-
-  spec {
-    type = "LoadBalancer"
-    selector = {
-      app = "gitea"
-    }
-    port {
-      name        = "ssh"
-      port        = var.ssh_port
-      target_port = 22
-      protocol    = "TCP"
-    }
-  }
+module "gitea_ssh" {
+  source                 = "../../../modules/services"
+  name                   = "gitea-ssh"
+  namespace              = var.namespace
+  headless               = true
+  port                   = var.ssh_port
+  target_port            = var.ssh_port
+  external               = true
+  external_ip            = var.ssh_external_ip
+  external_port_protocol = "TCP"
 }
+

@@ -9,6 +9,6 @@ module "gitea_ingress" {
   port              = var.http_port
 
   depends_on = [
-    kubernetes_stateful_set.gitea
+    module.gitea_stateful_set
   ]
 }

@@ -20,7 +20,7 @@ variable "storage_size" {
 variable "ssh_external_ip" {
   description = "External IP for SSH access via MetalLB"
   type        = string
-  default     = "192.168.0.130"
+  default     = "192.168.0.122"
 }
 
 variable "http_port" {
