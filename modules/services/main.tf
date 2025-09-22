@@ -3,14 +3,14 @@ resource "kubernetes_service" "this-headless" {
   count = var.headless ? 1 : 0
 
   metadata {
-    name      = "${var.name}-headless"
+    name      = "${var.service_name}-headless"
     namespace = var.namespace
   }
 
   spec {
     cluster_ip = "None"
     selector = {
-      app = var.name
+      app = var.app_name
     }
 
     port {
@@ -25,13 +25,13 @@ resource "kubernetes_service" "this-headless" {
 # Regular service for easy access
 resource "kubernetes_service" "this" {
   metadata {
-    name      = var.name
+    name      = var.service_name
     namespace = var.namespace
   }
 
   spec {
     selector = {
-      app = var.name
+      app = var.app_name
     }
 
     port {
@@ -46,7 +46,7 @@ resource "kubernetes_service" "this-external" {
   count = var.external ? 1 : 0
 
   metadata {
-    name      = "${var.name}-external"
+    name      = "${var.service_name}-external"
     namespace = var.namespace
     annotations = {
       "metallb.universe.tf/loadBalancerIPs" = var.external_ip
@@ -57,11 +57,11 @@ resource "kubernetes_service" "this-external" {
     type = var.external_service_type
 
     selector = {
-      app = var.name
+      app = var.app_name
     }
 
     port {
-      name        = var.name
+      name        = var.service_name
       port        = var.port
       target_port = var.target_port
       protocol    = var.external_port_protocol

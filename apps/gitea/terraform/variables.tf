@@ -35,6 +35,12 @@ variable "ssh_port" {
   default     = 2222
 }
 
+variable "internal_ssh_port" {
+  description = "container ssh port"
+  type = number
+  default = 22
+}
+
 
 variable "request_cpu" {
   description = "Request CPU for container"

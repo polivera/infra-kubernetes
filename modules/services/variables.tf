@@ -34,9 +34,14 @@ variable "external_service_type" {
   default     = "LoadBalancer"
 }
 
-variable "name" {
-  description = "Service Name"
-  type        = string
+variable "service_name" {
+  description = "Service name"
+  type = string
+}
+
+variable "app_name" {
+  description = "Application name"
+  type = string
 }
 
 variable "namespace" {
