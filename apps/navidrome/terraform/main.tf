@@ -23,7 +23,6 @@ resource "kubernetes_namespace" "navidrome" {
   }
 }
 
-
 locals {
   app_url = "music.${module.globals.domain}"
 }

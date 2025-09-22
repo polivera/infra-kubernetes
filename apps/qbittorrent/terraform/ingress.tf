@@ -13,6 +13,6 @@ module "qbittorrent_ingress" {
   port              = var.web_port
 
   depends_on = [
-    kubernetes_stateful_set.qbittorrent
+    module.qbittorrent_stateful_set
   ]
 }

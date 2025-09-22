@@ -11,12 +11,6 @@ variable "image" {
   default     = "lscr.io/linuxserver/qbittorrent:latest"
 }
 
-variable "replicas" {
-  description = "Number of qBittorrent replicas"
-  type        = number
-  default     = 1
-}
-
 variable "config_storage" {
   description = "Storage size for qBittorrent config"
   type        = string

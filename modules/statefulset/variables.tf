@@ -10,7 +10,7 @@ variable "app_name" {
 
 variable "service_name" {
   description = "Name of the stateful service"
-  type = string
+  type        = string
 }
 
 variable "image" {
@@ -18,9 +18,13 @@ variable "image" {
   type        = string
 }
 
-variable "port" {
-  description = "Deployment application port"
-  type        = number
+variable "ports" {
+  description = "Stateful set ports"
+  type = list(object({
+    port     = number
+    name     = string
+    protocol = string
+  }))
 }
 
 variable "replicas" {
@@ -87,16 +91,30 @@ variable "claims" {
   }))
 }
 
+variable "volume_configs" {
+  description = "Volume claims"
+  type = list(object({
+    name        = string
+    config_name = string
+  }))
+}
+
 variable "http_probe" {
   description = "Set the path for liveness and readiness probe"
-  type = string
-  default = null
+  type        = string
+  default     = null
+}
+
+variable "http_probe_port" {
+  description = "Port for probing"
+  type        = number
+  default     = null
 }
 
 variable "command_probe" {
   description = "Set the path for liveness and readiness probe"
-  type = list(string)
-  default = null
+  type        = list(string)
+  default     = null
 }
 
 # Resource limits

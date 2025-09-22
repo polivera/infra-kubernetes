@@ -5,8 +5,13 @@ module "postgres_stateful_set" {
   service_name = "${var.namespace}-headless"
   app_name     = var.namespace
   image        = var.image
-  port         = var.port
-
+  ports = [
+    {
+      port     = var.port
+      name     = "standar"
+      protocol = "TCP"
+    }
+  ]
   request_cpu    = var.request_cpu
   request_memory = var.request_memory
   limit_cpu      = var.limit_cpu

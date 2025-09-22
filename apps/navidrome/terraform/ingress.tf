@@ -10,7 +10,7 @@ module "navidrome_ingress" {
   port              = var.port
 
   depends_on = [
-    kubernetes_deployment.navidrome
+    module.navidrome_deployment
   ]
 }
 

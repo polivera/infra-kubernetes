@@ -5,11 +5,19 @@ module "kavita_deployment" {
   app_name  = var.namespace
   image     = var.image
   namespace = var.namespace
-  port      = var.port
+  ports = [
+    {
+      port     = var.port
+      name     = "standar"
+      protocol = "TCP"
+    }
+  ]
   request_cpu = var.request_cpu
   request_memory = var.request_memory
   limit_cpu = var.limit_cpu
   limit_memory = var.limit_memory
+  http_probe = "/"
+  http_probe_port = var.port
   envs = {
     TZ = {
       value = module.globals.timezone

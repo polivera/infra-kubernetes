@@ -13,9 +13,13 @@ variable "image" {
   type        = string
 }
 
-variable "port" {
-  description = "Deployment application port"
-  type        = number
+variable "ports" {
+  description = "Stateful set ports"
+  type = list(object({
+    port     = number
+    name     = string
+    protocol = string
+  }))
 }
 
 variable "replicas" {
@@ -86,6 +90,12 @@ variable "http_probe" {
   description = "Set the path for liveness and readiness probe"
   type = string
   default = null
+}
+
+variable "http_probe_port" {
+  description = "Port for probing"
+  type        = number
+  default     = null
 }
 
 variable "command_probe" {

@@ -44,10 +44,13 @@ resource "kubernetes_deployment" "this" {
           name  = coalesce(var.app_name, var.namespace)
           image = var.image
 
-          port {
-            name           = "http"
-            container_port = var.port
-            protocol       = "TCP"
+          dynamic "port" {
+            for_each = var.ports
+            content {
+              name = port.value.name
+              container_port = port.value.port
+              protocol = port.value.protocol
+            }
           }
 
           dynamic "env" {
@@ -110,7 +113,7 @@ resource "kubernetes_deployment" "this" {
             content {
               http_get {
                 path = var.http_probe
-                port = var.port
+                port = var.http_probe_port
               }
               initial_delay_seconds = 30
               period_seconds        = 10
@@ -122,7 +125,7 @@ resource "kubernetes_deployment" "this" {
             content {
               http_get {
                 path = var.http_probe
-                port = var.port
+                port = var.http_probe_port
               }
               initial_delay_seconds = 30
               period_seconds        = 10
@@ -132,9 +135,8 @@ resource "kubernetes_deployment" "this" {
           dynamic "readiness_probe" {
             for_each = var.command_probe != null ? [1] : []
             content {
-              http_get {
-                path = var.http_probe
-                port = var.port
+              exec {
+                command = var.command_probe
               }
               initial_delay_seconds = 30
               period_seconds        = 10
@@ -144,9 +146,8 @@ resource "kubernetes_deployment" "this" {
           dynamic "liveness_probe" {
             for_each = var.command_probe != null ? [1] : []
             content {
-              http_get {
-                path = var.http_probe
-                port = var.port
+              exec {
+                command = var.command_probe
               }
               initial_delay_seconds = 30
               period_seconds        = 10
