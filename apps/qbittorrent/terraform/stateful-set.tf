@@ -74,4 +74,5 @@ module "qbittorrent_stateful_set" {
     module.qbittorrent_downloads_storage,
     kubernetes_config_map.qbittorrent
   ]
+  volume_configs = []
 }

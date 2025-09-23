@@ -32,7 +32,7 @@ variable "request_cpu" {
 variable "request_memory" {
   description = "Request Memory for container"
   type        = string
-  default     = "1Gi"
+  default     = "512Mi"
 }
 
 variable "limit_cpu" {
@@ -44,7 +44,7 @@ variable "limit_cpu" {
 variable "limit_memory" {
   description = "Limit Memory for container"
   type        = string
-  default     = "4Gi"
+  default     = "1Gi"
 }
 
 variable "web_port" {

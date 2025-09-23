@@ -8,7 +8,13 @@ variable "namespace" {
 variable "mysql_image" {
   description = "MySQL Image"
   type        = string
-  default     = "mongo:7.0"
+  default     = "mysql:8.4"
+}
+
+variable "mysql_app_name" {
+  description = "Application name for mysql flipflow"
+  type = string
+  default = "flipflow-mysql"
 }
 
 variable "mysql_request_storage" {
@@ -44,7 +50,7 @@ variable "mysql_limit_memory" {
 variable "mysql_port" {
   description = "MySQL Port"
   type        = number
-  default     = 27017
+  default     = 3306
 }
 
 variable "mysql_external_port" {
