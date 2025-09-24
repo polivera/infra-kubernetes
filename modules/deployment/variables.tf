@@ -98,6 +98,12 @@ variable "http_probe_port" {
   default     = null
 }
 
+variable "tcp_probe" {
+  description = "Port to set a readiness and start probe on port"
+  type = number
+  default = null
+}
+
 variable "command_probe" {
   description = "Set the path for liveness and readiness probe"
   type = list(string)

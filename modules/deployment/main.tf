@@ -153,6 +153,45 @@ resource "kubernetes_deployment" "this" {
               period_seconds        = 10
             }
           }
+
+          dynamic "readiness_probe" {
+            for_each = var.tcp_probe != null ? [1] : []
+            content {
+              tcp_socket {
+                port = var.tcp_probe
+              }
+              initial_delay_seconds = 5
+              period_seconds        = 5
+              timeout_seconds       = 1
+              failure_threshold     = 3
+            }
+          }
+
+          dynamic "liveness_probe" {
+            for_each = var.tcp_probe != null ? [1] : []
+            content {
+              tcp_socket {
+                port = var.tcp_probe
+              }
+              initial_delay_seconds = 30
+              period_seconds        = 10
+              timeout_seconds       = 5
+              failure_threshold     = 3
+            }
+          }
+
+          dynamic "startup_probe" {
+            for_each = var.tcp_probe != null ? [1] : []
+            content {
+              tcp_socket {
+                port = var.tcp_probe
+              }
+              initial_delay_seconds = 30
+              period_seconds        = 10
+              timeout_seconds       = 5
+              failure_threshold     = 3
+            }
+          }
         }
 
         dynamic "volume" {
