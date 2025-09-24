@@ -1,0 +1,7 @@
+#!/usr/bin/env just --justfile
+
+install:
+  helm install --wait gpu-operator \
+      -n gpu-operator --create-namespace \
+      nvidia/gpu-operator \
+      -f gpu-operator-k3s-values.yaml

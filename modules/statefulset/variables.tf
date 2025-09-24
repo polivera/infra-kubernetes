@@ -91,6 +91,12 @@ variable "claims" {
   }))
 }
 
+variable "command_start" {
+  description = "Startup command for the stateful set"
+  type = list(string)
+  default = []
+}
+
 variable "volume_configs" {
   description = "Volume claims"
   type = list(object({
@@ -123,6 +129,12 @@ variable "command_probe" {
   description = "Set the path for liveness and readiness probe"
   type        = list(string)
   default     = null
+}
+
+variable "tcp_probe" {
+  description = "Port to set a readiness and start probe on port"
+  type = number
+  default = null
 }
 
 # Resource limits

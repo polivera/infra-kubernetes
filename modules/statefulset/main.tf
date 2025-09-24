@@ -45,12 +45,14 @@ resource "kubernetes_stateful_set" "this" {
           name  = coalesce(var.app_name, var.namespace)
           image = var.image
 
+          command = var.command_start
+
           dynamic "port" {
             for_each = var.ports
             content {
-              name = port.value.name
+              name           = port.value.name
               container_port = port.value.port
-              protocol = port.value.protocol
+              protocol       = port.value.protocol
             }
           }
 
@@ -154,6 +156,46 @@ resource "kubernetes_stateful_set" "this" {
               period_seconds        = 10
             }
           }
+
+
+          dynamic "readiness_probe" {
+            for_each = var.tcp_probe != null ? [1] : []
+            content {
+              tcp_socket {
+                port = var.tcp_probe
+              }
+              initial_delay_seconds = 5
+              period_seconds        = 5
+              timeout_seconds       = 1
+              failure_threshold     = 3
+            }
+          }
+
+          dynamic "liveness_probe" {
+            for_each = var.tcp_probe != null ? [1] : []
+            content {
+              tcp_socket {
+                port = var.tcp_probe
+              }
+              initial_delay_seconds = 30
+              period_seconds        = 10
+              timeout_seconds       = 5
+              failure_threshold     = 3
+            }
+          }
+
+          dynamic "startup_probe" {
+            for_each = var.tcp_probe != null ? [1] : []
+            content {
+              tcp_socket {
+                port = var.tcp_probe
+              }
+              initial_delay_seconds = 30
+              period_seconds        = 10
+              timeout_seconds       = 5
+              failure_threshold     = 3
+            }
+          }
         }
 
         dynamic "volume" {
@@ -175,8 +217,8 @@ resource "kubernetes_stateful_set" "this" {
               dynamic "items" {
                 for_each = volume.value.items != null ? [1] : []
                 content {
-                  key  =  volume.value.items.key
-                  path =  volume.value.items.path
+                  key  = volume.value.items.key
+                  path = volume.value.items.path
                 }
               }
             }

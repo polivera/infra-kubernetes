@@ -9,6 +9,6 @@ module "searxng_ingress" {
   port              = var.port
 
   depends_on = [
-    kubernetes_stateful_set.searxng
+    module.searxng_stateful_set
   ]
 }
