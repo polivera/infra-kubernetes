@@ -27,6 +27,6 @@ data "sops_file" "secrets" {
 # Reference existing namespace - DON'T CREATE IT
 data "kubernetes_namespace" "mysql" {
   metadata {
-    name = "flipflow"
+    name = var.namespace
   }
 }

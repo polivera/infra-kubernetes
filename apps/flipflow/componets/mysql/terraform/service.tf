@@ -7,5 +7,5 @@ module "mysql_service" {
   port        = var.mysql_external_port
   target_port = var.mysql_port
   app_name    = var.mysql_app_name
-  service_name = "mysql-serivce"
+  service_name = "${var.namespace}-mysql-serivce"
 }

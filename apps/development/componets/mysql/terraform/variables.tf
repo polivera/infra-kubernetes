@@ -1,8 +1,8 @@
 # apps/mysql/terraform/variables.tf
 variable "namespace" {
-  description = "Flipflow namespace"
+  description = "development namespace"
   type        = string
-  default     = "flipflow"
+  default     = "development"
 }
 
 variable "mysql_image" {
@@ -14,7 +14,7 @@ variable "mysql_image" {
 variable "mysql_app_name" {
   description = "Application name for mysql development"
   type = string
-  default = "flipflow-mysql"
+  default = "development-mysql"
 }
 
 variable "mysql_request_storage" {
@@ -56,5 +56,5 @@ variable "mysql_port" {
 variable "mysql_external_port" {
   description = "MySQL Port"
   type        = number
-  default     = 11875
+  default     = 10306
 }

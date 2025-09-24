@@ -27,7 +27,7 @@ module "flipflow_mysql_statefulset" {
     }
 
   ]
-  service_name   = "${var.namespace}-mysql-headless"
+  service_name   = "${var.namespace}-mysql"
   volume_configs = []
   mounts = [
     {

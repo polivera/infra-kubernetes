@@ -1,6 +1,6 @@
 # apps/mysql/terraform/mysql.tf
 
-module "flipflow_mysql_statefulset" {
+module "development_mysql_statefulset" {
   source    = "../../../../../modules/statefulset"
   app_name  = var.mysql_app_name
   image     = var.mysql_image
@@ -9,14 +9,6 @@ module "flipflow_mysql_statefulset" {
     MYSQL_ROOT_PASSWORD = {
       secret_name = kubernetes_secret.mysql.metadata[0].name
       secret_key  = "mysql-root-password"
-    }
-    MYSQL_USER = {
-      secret_name = kubernetes_secret.mysql.metadata[0].name
-      secret_key  = "mysql-user"
-    }
-    MYSQL_PASSWORD = {
-      secret_name = kubernetes_secret.mysql.metadata[0].name
-      secret_key  = "mysql-password"
     }
   }
   ports = [

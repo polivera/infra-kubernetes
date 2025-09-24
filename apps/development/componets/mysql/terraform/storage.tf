@@ -4,5 +4,5 @@ module "mysql_storage" {
   namespace  = data.kubernetes_namespace.mysql.metadata[0].name
   size       = var.mysql_request_storage
   pool       = "fast"
-  force_path = "Flipflow/mysql"
+  force_path = "Development/mysql"
 }
