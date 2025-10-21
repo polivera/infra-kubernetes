@@ -1,3 +1,4 @@
+
 resource "kubernetes_stateful_set" "mongodb" {
   metadata {
     name      = "mongodb"

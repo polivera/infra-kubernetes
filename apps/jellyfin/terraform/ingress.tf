@@ -11,6 +11,6 @@ module "jellyfin-ingres" {
   port              = var.port
 
   depends_on = [
-    kubernetes_deployment.jellyfin
+    module.jellyfin_deployment
   ]
 }
